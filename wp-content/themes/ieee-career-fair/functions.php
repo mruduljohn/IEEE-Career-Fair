@@ -35,6 +35,20 @@ function ieee_career_fair_setup() {
     // Enable support for Post Thumbnails on posts and pages
     add_theme_support('post-thumbnails');
 
+    // Add custom logo support
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 250,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
+
+    // Add custom background support
+    add_theme_support('custom-background');
+    
+    // Add custom header support
+    add_theme_support('custom-header');
+
     // Add custom image sizes for various sections
     add_image_size('hero-bg', 1920, 1080, true);
     add_image_size('partner-logo', 300, 150, true);
