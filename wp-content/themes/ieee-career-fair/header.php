@@ -37,10 +37,123 @@
     <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/ieee-logo.png">
     
     <?php wp_head(); ?>
+    <style type="text/css">
+        .meta-nav {
+            min-height: 40px;
+            background: #000000;
+            color: #ffffff;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        #meta-ieee-logo {
+            margin: 0px;
+            float:right;
+        }
+
+        #meta-ieee-logo .joinIEEE{
+            text-align: right;
+            color: #fff;
+            padding: 11px 36px;
+        }
+
+        #meta-ieee-logo .joinIEEE:link, #meta-ieee-logo .joinIEEE:visited, #meta-ieee-logo .joinIEEE:active {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #meta-ieee-logo .joinIEEE:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 800px) {
+            .meta-nav {
+                min-height: 100px;
+                background: #000000;
+                color: #ffffff;
+                padding: 0px;
+                margin: 0px;
+            }
+            .meta-ieee-logo {
+                padding: 20px 0px 0px 0px;
+                float:right;
+                max-width: 100px;
+            }
+        }
+        
+        #ieee-meta-a {
+            color: #fff;
+            text-align: left;
+            padding: 11px 36px;
+            float: left;
+        }
+        
+        #ieee-meta-a a:link, #ieee-meta-a a:visited, #ieee-meta-a a:active {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        #ieee-meta-a a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+        
+        #meta-ieee-logo .donate {
+            float: right;
+            color: #fff;
+            padding: 11px 36px;
+            text-decoration: none;
+        }
+        
+        #meta-ieee-logo .donate:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        #meta-ieee-logo .Signin {
+            float: left;
+            color: #fff;
+            padding: 11px 36px;
+            text-decoration: none;
+        }
+        
+        #meta-ieee-logo .Signin:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        #meta-ieee-logo .Account {
+            float: left;
+            color: #fff;
+            padding: 11px 36px;
+            text-decoration: none;
+        }
+        
+        #meta-ieee-logo .Account:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+
+<!-- IEEE Meta Navigation -->
+<div class="meta-nav">
+    <p id="ieee-meta-a">
+        <a href="https://www.ieee.org/index.html">IEEE.org</a> &#160;|&#160; 
+        <a href="https://www.ieeexplore.ieee.org/Xplore/guesthome.jsp">IEEE <em>Xplore</em><sup>®</sup></a>&#160;|&#160; 
+        <a href="https://standards.ieee.org/">IEEE Standards</a> &#160;|&#160; 
+        <a href="https://spectrum.ieee.org/">IEEE Spectrum</a> &#160;|&#160; 
+        <a href="https://www.ieee.org/sitemap.html">More Sites</a>
+    </p>
+    <p id="ieee-meta-a" style="text-align:right; float: right;">
+        <a href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join">Join IEEE</a> &#160;|&#160; 
+        <a href="https://www.ieee.org/give">Donate</a>
+    </p>
+</div>
 
 <div id="page" class="site">
     <header id="masthead" class="site-header">

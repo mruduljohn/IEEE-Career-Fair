@@ -472,7 +472,7 @@ function ieee_homepage_content_callback($post) {
                           rows="3" 
                           cols="50" 
                           class="large-text" 
-                          placeholder="<?php _e('Connect with top employers, explore exciting career opportunities...', 'ieee-career-fair'); ?>"><?php echo esc_textarea($hero_subtitle); ?></textarea>
+                          placeholder="<?php _e('Connect with top employers, explore exciting career opportunities, and take the next step in your professional journey with IEEE Career Fairs.', 'ieee-career-fair'); ?>"><?php echo esc_textarea($hero_subtitle); ?></textarea>
                 <p class="description"><?php _e('The descriptive text that appears below the main headline.', 'ieee-career-fair'); ?></p>
             </td>
         </tr>
@@ -490,7 +490,7 @@ function ieee_homepage_content_callback($post) {
                        name="ieee_cta_primary_text" 
                        value="<?php echo esc_attr($cta_primary_text); ?>" 
                        class="regular-text" 
-                       placeholder="<?php _e('Explore Career Fair', 'ieee-career-fair'); ?>" />
+                       placeholder="<?php _e('Explore Career Fairs', 'ieee-career-fair'); ?>" />
             </td>
         </tr>
         <tr>
@@ -516,7 +516,7 @@ function ieee_homepage_content_callback($post) {
                        name="ieee_cta_secondary_text" 
                        value="<?php echo esc_attr($cta_secondary_text); ?>" 
                        class="regular-text" 
-                       placeholder="<?php _e('Register as Student', 'ieee-career-fair'); ?>" />
+                       placeholder="<?php _e('Register for Events', 'ieee-career-fair'); ?>" />
             </td>
         </tr>
         <tr>
@@ -795,11 +795,248 @@ function ieee_customize_register($wp_customize) {
         'settings' => 'ieee_hero_bg',
     )));
 
+    // Hero Title
+    $wp_customize->add_setting('ieee_hero_title', array(
+        'default'           => __('IEEE Career Fair: Your Gateway to Opportunity', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_hero_title', array(
+        'label'    => __('Hero Title', 'ieee-career-fair'),
+        'section'  => 'ieee_hero_section',
+        'type'     => 'text',
+    ));
+
+    // Hero Subtitle
+    $wp_customize->add_setting('ieee_hero_subtitle', array(
+        'default'           => __('Connect with top employers, explore exciting career opportunities, and take the next step in your professional journey with IEEE Career Fairs.', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+
+    $wp_customize->add_control('ieee_hero_subtitle', array(
+        'label'    => __('Hero Subtitle', 'ieee-career-fair'),
+        'section'  => 'ieee_hero_section',
+        'type'     => 'textarea',
+    ));
+
+    // CTA Section
+    $wp_customize->add_section('ieee_cta_section', array(
+        'title'    => __('Call-to-Action Buttons', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 15,
+    ));
+
+    // Primary CTA
+    $wp_customize->add_setting('ieee_primary_cta_text', array(
+        'default'           => __('Explore Career Fairs', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_primary_cta_text', array(
+        'label'    => __('Primary Button Text', 'ieee-career-fair'),
+        'section'  => 'ieee_cta_section',
+        'type'     => 'text',
+    ));
+
+    $wp_customize->add_setting('ieee_primary_cta_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control('ieee_primary_cta_url', array(
+        'label'    => __('Primary Button URL', 'ieee-career-fair'),
+        'section'  => 'ieee_cta_section',
+        'type'     => 'url',
+    ));
+
+    // Secondary CTA
+    $wp_customize->add_setting('ieee_secondary_cta_text', array(
+        'default'           => __('Register for Events', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_secondary_cta_text', array(
+        'label'    => __('Secondary Button Text', 'ieee-career-fair'),
+        'section'  => 'ieee_cta_section',
+        'type'     => 'text',
+    ));
+
+    $wp_customize->add_setting('ieee_secondary_cta_url', array(
+        'default'           => '#',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control('ieee_secondary_cta_url', array(
+        'label'    => __('Secondary Button URL', 'ieee-career-fair'),
+        'section'  => 'ieee_cta_section',
+        'type'     => 'url',
+    ));
+
+    // Partners Section
+    $wp_customize->add_section('ieee_partners_section', array(
+        'title'    => __('Partners Section', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 20,
+    ));
+
+    // Partners Title
+    $wp_customize->add_setting('ieee_partners_title', array(
+        'default'           => __('Our Partners', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_partners_title', array(
+        'label'    => __('Partners Section Title', 'ieee-career-fair'),
+        'section'  => 'ieee_partners_section',
+        'type'     => 'text',
+    ));
+
+    // Partners Description
+    $wp_customize->add_setting('ieee_partners_description', array(
+        'default'           => __('We collaborate with leading organizations to bring you the best career opportunities.', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+
+    $wp_customize->add_control('ieee_partners_description', array(
+        'label'    => __('Partners Section Description', 'ieee-career-fair'),
+        'section'  => 'ieee_partners_section',
+        'type'     => 'textarea',
+    ));
+
+    // Events Section
+    $wp_customize->add_section('ieee_events_section', array(
+        'title'    => __('Events Section', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 25,
+    ));
+
+    // Events Title
+    $wp_customize->add_setting('ieee_events_title', array(
+        'default'           => __('Explore Upcoming Career Fairs', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_events_title', array(
+        'label'    => __('Events Section Title', 'ieee-career-fair'),
+        'section'  => 'ieee_events_section',
+        'type'     => 'text',
+    ));
+
+    // Events Description
+    $wp_customize->add_setting('ieee_events_description', array(
+        'default'           => __('Find an IEEE career fair near you and connect with potential employers.', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+
+    $wp_customize->add_control('ieee_events_description', array(
+        'label'    => __('Events Section Description', 'ieee-career-fair'),
+        'section'  => 'ieee_events_section',
+        'type'     => 'textarea',
+    ));
+
+    // Number of events to show
+    $wp_customize->add_setting('ieee_events_count', array(
+        'default'           => 6,
+        'sanitize_callback' => 'absint',
+    ));
+
+    $wp_customize->add_control('ieee_events_count', array(
+        'label'    => __('Number of Events to Display', 'ieee-career-fair'),
+        'section'  => 'ieee_events_section',
+        'type'     => 'number',
+        'input_attrs' => array(
+            'min'   => 3,
+            'max'   => 12,
+            'step'  => 1,
+        ),
+    ));
+
+    // FAQ Section
+    $wp_customize->add_section('ieee_faq_section', array(
+        'title'    => __('FAQ Section', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 30,
+    ));
+
+    // FAQ Title
+    $wp_customize->add_setting('ieee_faq_title', array(
+        'default'           => __('What Are IEEE Virtual Career Fairs?', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_faq_title', array(
+        'label'    => __('FAQ Section Title', 'ieee-career-fair'),
+        'section'  => 'ieee_faq_section',
+        'type'     => 'text',
+    ));
+
+    // FAQ Content
+    $wp_customize->add_setting('ieee_faq_content', array(
+        'default'           => __('IEEE Career Fairs are globally recognized events connecting top employers with talented professionals across engineering, computing, and technology fields...', 'ieee-career-fair'),
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+
+    $wp_customize->add_control('ieee_faq_content', array(
+        'label'    => __('FAQ Content', 'ieee-career-fair'),
+        'section'  => 'ieee_faq_section',
+        'type'     => 'textarea',
+    ));
+
+    // Why IEEE Section
+    $wp_customize->add_section('ieee_why_section', array(
+        'title'    => __('Why IEEE Career Fairs Section', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 35,
+    ));
+
+    // Why IEEE Title
+    $wp_customize->add_setting('ieee_why_title', array(
+        'default'           => __('Why Should Companies Join IEEE Career Fairs?', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('ieee_why_title', array(
+        'label'    => __('Section Title', 'ieee-career-fair'),
+        'section'  => 'ieee_why_section',
+        'type'     => 'text',
+    ));
+
+    // Why IEEE Content
+    $wp_customize->add_setting('ieee_why_content', array(
+        'default'           => __('Partnering with IEEE provides unparalleled access to skilled talent across engineering, computing, and technical fields...', 'ieee-career-fair'),
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+
+    $wp_customize->add_control('ieee_why_content', array(
+        'label'    => __('Section Content', 'ieee-career-fair'),
+        'section'  => 'ieee_why_section',
+        'type'     => 'textarea',
+    ));
+
+    // Footer Section
+    $wp_customize->add_section('ieee_footer_section', array(
+        'title'    => __('Footer Content', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 40,
+    ));
+
+    // Footer About Text
+    $wp_customize->add_setting('ieee_footer_about', array(
+        'default'           => __('IEEE Career Fairs connect talented professionals with top employers across various technology fields. Our events provide networking opportunities, career insights, and direct access to industry leaders.', 'ieee-career-fair'),
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+
+    $wp_customize->add_control('ieee_footer_about', array(
+        'label'    => __('About Text', 'ieee-career-fair'),
+        'section'  => 'ieee_footer_section',
+        'type'     => 'textarea',
+    ));
+
     // Contact Information Section
     $wp_customize->add_section('ieee_contact_section', array(
         'title'    => __('Contact Information', 'ieee-career-fair'),
         'panel'    => 'ieee_career_fair_panel',
-        'priority' => 20,
+        'priority' => 45,
     ));
 
     // Contact email
@@ -829,6 +1066,35 @@ function ieee_customize_register($wp_customize) {
             'type'     => 'url',
         ));
     }
+
+    // Colors Section
+    $wp_customize->add_section('ieee_colors_section', array(
+        'title'    => __('Color Scheme', 'ieee-career-fair'),
+        'panel'    => 'ieee_career_fair_panel',
+        'priority' => 50,
+    ));
+
+    // Primary Color
+    $wp_customize->add_setting('ieee_primary_color', array(
+        'default'           => '#00629b',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'ieee_primary_color', array(
+        'label'    => __('Primary Color', 'ieee-career-fair'),
+        'section'  => 'ieee_colors_section',
+    )));
+
+    // Secondary Color
+    $wp_customize->add_setting('ieee_secondary_color', array(
+        'default'           => '#ffb81c',
+        'sanitize_callback' => 'sanitize_hex_color',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'ieee_secondary_color', array(
+        'label'    => __('Secondary Color', 'ieee-career-fair'),
+        'section'  => 'ieee_colors_section',
+    )));
 }
 add_action('customize_register', 'ieee_customize_register');
 
@@ -926,5 +1192,3 @@ class IEEE_Bootstrap_Nav_Walker extends Walker_Nav_Menu {
         $output .= "</li>\n";
     }
 }
-
-?>
