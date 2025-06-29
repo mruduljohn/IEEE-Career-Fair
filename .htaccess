@@ -1,4 +1,3 @@
-
 # BEGIN WordPress
 # The directives (lines) between "BEGIN WordPress" and "END WordPress" are
 # dynamically generated, and should only be modified via WordPress filters.
@@ -6,6 +5,19 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Fix admin URLs without /wp-admin/ prefix
+RewriteRule ^edit\.php(.*)$ /wp-admin/edit.php$1 [R=301,L]
+RewriteRule ^post\.php(.*)$ /wp-admin/post.php$1 [R=301,L]
+RewriteRule ^post-new\.php(.*)$ /wp-admin/post-new.php$1 [R=301,L]
+RewriteRule ^admin\.php(.*)$ /wp-admin/admin.php$1 [R=301,L]
+RewriteRule ^options-general\.php(.*)$ /wp-admin/options-general.php$1 [R=301,L]
+RewriteRule ^customize\.php(.*)$ /wp-admin/customize.php$1 [R=301,L]
+RewriteRule ^themes\.php(.*)$ /wp-admin/themes.php$1 [R=301,L]
+RewriteRule ^plugins\.php(.*)$ /wp-admin/plugins.php$1 [R=301,L]
+RewriteRule ^users\.php(.*)$ /wp-admin/users.php$1 [R=301,L]
+RewriteRule ^profile\.php(.*)$ /wp-admin/profile.php$1 [R=301,L]
+
 RewriteBase /ieee-career-fair-theme/
 RewriteRule ^index\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f

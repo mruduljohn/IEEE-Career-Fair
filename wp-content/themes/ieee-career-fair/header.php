@@ -36,7 +36,6 @@
     <meta name="twitter:description" content="<?php echo get_bloginfo('description'); ?>">
     <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/ieee-logo.png">
     
-    <!-- IEEE Meta Nav Styles -->
     <style type="text/css">
         .meta-nav {
             min-height: 40px;
@@ -48,10 +47,10 @@
         
         #meta-ieee-logo {
             margin: 0px;
-            float: right;
+            float:right;
         }
 
-        #meta-ieee-logo .joinIEEE {
+        #meta-ieee-logo .joinIEEE{
             text-align: right;
             color: #fff;
             padding: 11px 36px;
@@ -68,20 +67,28 @@
         }
         
         @media (max-width: 800px) {
-            .meta-nav {
-                min-height: 100px;
-                background: #000000;
-                color: #ffffff;
-                padding: 0px;
-                margin: 0px;
-            }
-            .meta-ieee-logo {
-                padding: 20px 0px 0px 0px;
-                float: right;
-                max-width: 100px;
-            }
+        .meta-nav {
+            min-height: 100px;
+            background: #000000;
+            color: #ffffff;
+            padding: 0px;
+            margin: 0px;
+        }
+        .meta-ieee-logo {
+            padding: 20px 0px 0px 0px;
+            float:right;
+            max-width: 100px;
+        }
         }
         
+        p {
+            font-family: inherit;
+            font-size: .9em;
+            line-height: 125%;
+            border: 0;
+            margin: 0;
+        }
+
         #ieee-meta-a {
             color: #fff;
             text-align: left;
@@ -98,8 +105,7 @@
             color: #fff;
             text-decoration: underline;
         }
-        
-        #meta-ieee-logo .donate {
+        #meta-ieee-logo .donate{
             float: right;
             color: #fff;
             padding: 11px 36px;
@@ -111,7 +117,7 @@
             text-decoration: underline;
         }
 
-        #meta-ieee-logo .Signin {
+        #meta-ieee-logo .Signin{
             float: left;
             color: #fff;
             padding: 11px 36px;
@@ -123,7 +129,7 @@
             text-decoration: underline;
         }
 
-        #meta-ieee-logo .Account {
+        #meta-ieee-logo .Account{
             float: left;
             color: #fff;
             padding: 11px 36px;
@@ -133,6 +139,38 @@
         #meta-ieee-logo .Account:hover {
             color: #fff;
             text-decoration: underline;
+        }
+
+        .donate {
+            color: #fff;
+            text-align: left;
+            padding: 11px 36px;
+            text-align: left;
+        }
+
+        #donate {
+            color: #fff;
+            text-align: right;
+            padding: 11px 36px;
+            text-align: right;
+        }
+        
+        /* Main navigation styles */
+        .main-navigation {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .main-navigation .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ieee-logo {
+            height: 50px;
+            width: auto;
         }
     </style>
     
@@ -145,68 +183,45 @@
 <div id="page" class="site">
     <!-- IEEE Meta Navigation -->
     <div class="meta-nav">
-        <p id="ieee-meta-a">
-            <a href="https://www.ieee.org/index.html">IEEE.org</a> &#160;|&#160; 
-            <a href="https://www.ieeexplore.ieee.org/Xplore/guesthome.jsp">IEEE <em>Xplore</em><sup>®</sup></a>&#160;|&#160; 
-            <a href="https://standards.ieee.org/">IEEE Standards</a> &#160;|&#160; 
-            <a href="https://spectrum.ieee.org/">IEEE Spectrum</a> &#160;|&#160; 
-            <a href="https://www.ieee.org/sitemap.html">More Sites</a>
-        </p>
+        <p id="ieee-meta-a"><a href="https://www.ieee.org/index.html">IEEE.org</a> &#160;|&#160; <a href="https://www.ieeexplore.ieee.org/Xplore/guesthome.jsp">IEEE <em>Xplore</em><sup>®</sup></a>&#160;|&#160; <a href="https://standards.ieee.org/">IEEE Standards</a> &#160;|&#160; <a href="https://spectrum.ieee.org/">IEEE Spectrum</a> &#160;|&#160; <a href="https://www.ieee.org/sitemap.html">More Sites</a></p>
 
         <p id="ieee-meta-a" style="text-align:right; float: right;">
-            <a href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join">Join IEEE</a> &#160;|&#160; 
-            <a href="https://www.ieee.org/give">Donate</a>
+            <a href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join">Join IEEE</a> &#160;|&#160; <a href="https://www.ieee.org/give">Donate</a>
         </p>
     </div>
 
     <header id="masthead" class="site-header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <nav class="main-navigation">
             <div class="container">
                 <!-- Brand/Logo -->
                 <a class="navbar-brand d-flex align-items-center" href="<?php echo esc_url(home_url('/')); ?>">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ieee-logo.png" 
                          alt="<?php bloginfo('name'); ?>" 
-                         class="ieee-logo me-2">
-                    <span class="fw-bold text-primary d-none d-md-inline">
-                        <?php bloginfo('name'); ?>
-                    </span>
+                         class="ieee-logo">
                 </a>
 
-                <!-- Mobile menu toggle button -->
-                <button class="navbar-toggler" 
-                        type="button" 
-                        data-bs-toggle="collapse" 
-                        data-bs-target="#primary-navigation" 
-                        aria-controls="primary-navigation" 
-                        aria-expanded="false" 
-                        aria-label="<?php esc_attr_e('Toggle navigation', 'ieee-career-fair'); ?>">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
                 <!-- Navigation Menu -->
-                <div class="collapse navbar-collapse" id="primary-navigation">
+                <div class="main-menu">
                     <?php
                     wp_nav_menu(array(
                         'theme_location'  => 'primary',
-                        'menu_class'      => 'navbar-nav ms-auto mb-2 mb-lg-0',
+                        'menu_class'      => 'navbar-nav d-flex flex-row',
                         'container'       => false,
                         'fallback_cb'     => '__return_false',
                         'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                         'depth'           => 2,
-                        'walker'          => new IEEE_Bootstrap_Nav_Walker(),
                     ));
                     ?>
                     
                     <!-- Call-to-Action Button -->
-                    <div class="ms-3">
+                    <div class="ms-3 d-none d-lg-block">
                         <a href="#register" class="btn btn-warning btn-sm fw-bold">
-                            <i class="fas fa-user-plus me-1"></i>
                             <?php _e('Register Now', 'ieee-career-fair'); ?>
                         </a>
                     </div>
-                </div><!-- .navbar-collapse -->
-            </div><!-- .container -->
-        </nav><!-- .navbar -->
+                </div>
+            </div>
+        </nav>
     </header><!-- #masthead -->
 
     <div id="content" class="site-content"> 

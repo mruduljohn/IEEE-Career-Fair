@@ -1,45 +1,7 @@
     </div><!-- #content -->
 
-    <footer id="colophon" class="site-footer">
-        <!-- IEEE Standard Footer -->
+    <footer id="colophon" class="site-footer" style="background-color: #333333;">
         <div id="footer">
-            <style type="text/css">
-                #footer {
-                    font-family: Verdana, Arial, Helvetica, sans-serif;
-                    font-size: 100%;
-                    color: #666;
-                    background: #fff;
-                    padding: 0;
-                    border-top: 3px solid #999;
-                    margin: 0;
-                    text-align: center;
-                }
-                
-                #footer p {
-                    font-size: .9em;
-                    line-height: 120%;
-                    padding: 0 0 10px 0;
-                    border: 0;
-                    margin: 0;
-                }
-                
-                #util {
-                    color: #000;
-                    text-align: left;
-                    padding: 11px 36px;
-                }
-                
-                #util a:link, #util a:visited, #util a:active {
-                    color: #000;
-                    text-decoration: none;
-                }
-                
-                #util a:hover {
-                    color: #000;
-                    text-decoration: underline;
-                }
-            </style>
-            
             <p id="util">
                 <a href="http://www.ieee.org/index.html" id="u-home">Home</a> &#160;|&#160; 
                 <a href="http://www.ieee.org/sitemap.html" id="u-home">Sitemap/More Sites</a> &#160;|&#160; 
@@ -56,10 +18,45 @@
     </footer><!-- #colophon -->
 </div><!-- #page -->
 
+<style>
+    #util {
+        color: #fff;
+        text-align: left;
+        padding: 11px 36px;
+    }
+
+    #util a:link, #util a:visited, #util a:active {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    #util a:hover {
+        color: #fff;
+        text-decoration: underline;
+    }
+
+    /* Back to top button */
+    #back-to-top {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: #ffb81c;
+        color: #000;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+    }
+</style>
+
 <!-- Back to Top Button -->
-<button id="back-to-top" class="btn btn-warning position-fixed" style="bottom: 20px; right: 20px; z-index: 1000; display: none;">
+<button id="back-to-top" aria-label="Back to top">
     <i class="fas fa-chevron-up"></i>
-    <span class="sr-only"><?php _e('Back to top', 'ieee-career-fair'); ?></span>
 </button>
 
 <?php wp_footer(); ?>
