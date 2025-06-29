@@ -1,20 +1,11 @@
+[package]
+name = "ieee-career-fair-theme"
+version = "1.0.0"
+description = "IEEE Career Fair WordPress Theme Demo"
+license = "GPL-2.0"
+
 [dependencies]
 php = "8.1"
 
-[[module]]
-name = "ieee-career-fair-theme"
-source = "."
-
-[module.runner]
-start = "php -S 0.0.0.0:8080 -t ."
-
 [fs]
-mount = [".", "/app"]
-
-[[volume]]
-name = "uploads"
-mount = "/app/uploads"
-
-[env]
-PHP_MEMORY_LIMIT = "256M"
-PHP_MAX_EXECUTION_TIME = "60" 
+"/" = "." 
