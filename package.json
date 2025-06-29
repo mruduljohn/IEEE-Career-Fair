@@ -1,0 +1,38 @@
+{
+  "name": "ieee-career-fair-wordpress-theme",
+  "version": "1.0.0",
+  "description": "A modern, responsive WordPress theme for IEEE Career Fair events. Converted from Next.js to provide easy content management for non-technical users.",
+  "main": "index.php",
+  "scripts": {
+    "dev": "php -S localhost:8000",
+    "start": "php -S 0.0.0.0:8000",
+    "build": "echo 'WordPress theme ready for deployment'",
+    "deploy": "echo 'Deploying IEEE Career Fair WordPress Theme'"
+  },
+  "keywords": [
+    "wordpress",
+    "theme",
+    "ieee",
+    "career-fair",
+    "responsive",
+    "bootstrap",
+    "php"
+  ],
+  "author": "IEEE Career Fair Team",
+  "license": "GPL-2.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/ieee-career-fair-theme.git"
+  },
+  "engines": {
+    "php": ">=7.4",
+    "node": ">=14.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+} 

@@ -1,0 +1,20 @@
+[dependencies]
+php = "8.1"
+
+[[module]]
+name = "ieee-career-fair-theme"
+source = "."
+
+[module.runner]
+start = "php -S 0.0.0.0:8080 -t ."
+
+[fs]
+mount = [".", "/app"]
+
+[[volume]]
+name = "uploads"
+mount = "/app/uploads"
+
+[env]
+PHP_MEMORY_LIMIT = "256M"
+PHP_MAX_EXECUTION_TIME = "60" 
