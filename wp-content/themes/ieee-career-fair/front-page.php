@@ -12,116 +12,140 @@
 get_header(); ?>
 
 <?php
-// Get customizer settings with defaults
-$hero_title = get_theme_mod('ieee_hero_title', __('IEEE Career Fair: Your Gateway to Opportunity', 'ieee-career-fair'));
-$hero_subtitle = get_theme_mod('ieee_hero_subtitle', __('Connect with top employers, explore exciting career opportunities, and take the next step in your professional journey with IEEE Career Fairs.', 'ieee-career-fair'));
-$hero_bg = get_theme_mod('ieee_hero_bg', get_template_directory_uri() . '/assets/images/category-bg.jpg');
+// Get custom fields for this page
+$hero_title = get_post_meta(get_the_ID(), '_ieee_hero_title', true);
+$hero_subtitle = get_post_meta(get_the_ID(), '_ieee_hero_subtitle', true);
+$cta_primary_text = get_post_meta(get_the_ID(), '_ieee_cta_primary_text', true);
+$cta_primary_url = get_post_meta(get_the_ID(), '_ieee_cta_primary_url', true);
+$cta_secondary_text = get_post_meta(get_the_ID(), '_ieee_cta_secondary_text', true);
+$cta_secondary_url = get_post_meta(get_the_ID(), '_ieee_cta_secondary_url', true);
 
-$primary_cta_text = get_theme_mod('ieee_primary_cta_text', __('Explore Career Fairs', 'ieee-career-fair'));
-$primary_cta_url = get_theme_mod('ieee_primary_cta_url', '#');
-$secondary_cta_text = get_theme_mod('ieee_secondary_cta_text', __('Register for Events', 'ieee-career-fair'));
-$secondary_cta_url = get_theme_mod('ieee_secondary_cta_url', '#');
-
-$partners_title = get_theme_mod('ieee_partners_title', __('Our Partners', 'ieee-career-fair'));
-$partners_description = get_theme_mod('ieee_partners_description', __('We collaborate with leading organizations to bring you the best career opportunities.', 'ieee-career-fair'));
-
-$events_title = get_theme_mod('ieee_events_title', __('Explore Upcoming Career Fairs', 'ieee-career-fair'));
-$events_description = get_theme_mod('ieee_events_description', __('Find an IEEE career fair near you and connect with potential employers.', 'ieee-career-fair'));
-$events_count = get_theme_mod('ieee_events_count', 6);
-
-$faq_title = get_theme_mod('ieee_faq_title', __('What Are IEEE Virtual Career Fairs?', 'ieee-career-fair'));
-$faq_content = get_theme_mod('ieee_faq_content', __('IEEE Career Fairs are globally recognized events connecting top employers with talented professionals across engineering, computing, and technology fields...', 'ieee-career-fair'));
-
-$why_title = get_theme_mod('ieee_why_title', __('Why Should Companies Join IEEE Career Fairs?', 'ieee-career-fair'));
-$why_content = get_theme_mod('ieee_why_content', __('Partnering with IEEE provides unparalleled access to skilled talent across engineering, computing, and technical fields...', 'ieee-career-fair'));
-
-$primary_color = get_theme_mod('ieee_primary_color', '#00629b');
-$secondary_color = get_theme_mod('ieee_secondary_color', '#ffb81c');
+// Set defaults if custom fields are empty
+$hero_title = $hero_title ?: 'IEEE Career Fair: Your Gateway to Opportunity';
+$hero_subtitle = $hero_subtitle ?: 'Connect with top employers, explore exciting career opportunities, and take your professional journey to the next level at IEEE Career Fair - the premier destination for technology and engineering professionals.';
+$cta_primary_text = $cta_primary_text ?: 'Explore Career Fair';
+$cta_primary_url = $cta_primary_url ?: '#events';
+$cta_secondary_text = $cta_secondary_text ?: 'Register as Student';
+$cta_secondary_url = $cta_secondary_url ?: '#register';
 ?>
 
 <main id="main" class="site-main" role="main">
     
     <!-- Hero Section -->
-    <section id="hero" class="hero-section text-light py-5" style="background-image: url('<?php echo esc_url($hero_bg); ?>'); background-size: cover; background-position: center center;">
+    <section class="hero-section" id="hero">
         <div class="container">
-            <div class="row align-items-center min-vh-75">
-                <div class="col-lg-8 py-5">
-                    <h1 class="display-4 fw-bold mb-4"><?php echo esc_html($hero_title); ?></h1>
-                    <p class="lead mb-4"><?php echo esc_html($hero_subtitle); ?></p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="<?php echo esc_url($primary_cta_url); ?>" class="btn btn-primary btn-lg"><?php echo esc_html($primary_cta_text); ?></a>
-                        <a href="<?php echo esc_url($secondary_cta_url); ?>" class="btn btn-outline-light btn-lg"><?php echo esc_html($secondary_cta_text); ?></a>
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-10">
+                    <h1 class="hero-title" data-aos="fade-up" data-aos-delay="100">
+                        <?php echo esc_html($hero_title); ?>
+                    </h1>
+                    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">
+                        <?php echo esc_html($hero_subtitle); ?>
+                    </p>
+                    <div class="hero-buttons mt-4" data-aos="fade-up" data-aos-delay="300">
+                        <a href="<?php echo esc_url($cta_primary_url); ?>" class="cta-button me-3">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            <?php echo esc_html($cta_primary_text); ?>
+                        </a>
+                        <a href="<?php echo esc_url($cta_secondary_url); ?>" class="cta-button secondary">
+                            <i class="fas fa-user-graduate me-2"></i>
+                            <?php echo esc_html($cta_secondary_text); ?>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Scroll down indicator -->
+        <div class="scroll-indicator text-center mt-5">
+            <a href="#partners" class="text-white text-decoration-none">
+                <i class="fas fa-chevron-down fa-2x animate-bounce"></i>
+                <div class="small mt-2"><?php _e('Scroll to explore', 'ieee-career-fair'); ?></div>
+            </a>
+        </div>
     </section>
 
     <!-- Partners Section -->
-    <section id="partners" class="partners-section py-5 bg-light">
+    <section class="partners-section" id="partners">
         <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title"><?php echo esc_html($partners_title); ?></h2>
-                <p class="section-description"><?php echo esc_html($partners_description); ?></p>
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title mb-3" data-aos="fade-up">
+                        <?php _e('Our Partners', 'ieee-career-fair'); ?>
+                    </h2>
+                    <p class="text-muted" data-aos="fade-up" data-aos-delay="100">
+                        <?php _e('Collaborating with leading organizations worldwide', 'ieee-career-fair'); ?>
+                    </p>
+                </div>
             </div>
-            <div class="row justify-content-center align-items-center">
+            
+            <div class="row align-items-center justify-content-center g-4">
                 <?php
-                $partners_args = array(
-                    'post_type'      => 'partner',
+                // Get partners
+                $partners = new WP_Query(array(
+                    'post_type' => 'partner',
                     'posts_per_page' => 8,
-                    'orderby'        => 'title',
-                    'order'          => 'ASC',
-                );
-                
-                $partners_query = new WP_Query($partners_args);
-                
-                if ($partners_query->have_posts()) :
-                    while ($partners_query->have_posts()) : $partners_query->the_post();
+                    'post_status' => 'publish',
+                    'meta_query' => array(
+                        array(
+                            'key' => '_thumbnail_id',
+                            'compare' => 'EXISTS'
+                        )
+                    )
+                ));
+
+                if ($partners->have_posts()) :
+                    $delay = 100;
+                    while ($partners->have_posts()) :
+                        $partners->the_post();
                         $partner_url = get_post_meta(get_the_ID(), '_ieee_partner_url', true);
-                ?>
-                    <div class="col-6 col-md-3 col-lg-2 mb-4">
-                        <div class="partner-logo text-center">
+                        ?>
+                        <div class="col-6 col-md-4 col-lg-3 text-center" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
                             <?php if ($partner_url) : ?>
-                                <a href="<?php echo esc_url($partner_url); ?>" target="_blank" rel="noopener">
+                                <a href="<?php echo esc_url($partner_url); ?>" target="_blank" rel="noopener" class="partner-link">
                             <?php endif; ?>
-                            
-                            <?php if (has_post_thumbnail()) : ?>
-                                <?php the_post_thumbnail('partner-logo', array('class' => 'img-fluid', 'alt' => get_the_title())); ?>
-                            <?php else : ?>
-                                <div class="placeholder-logo p-4 bg-white rounded shadow-sm">
-                                    <?php echo esc_html(get_the_title()); ?>
-                                </div>
-                            <?php endif; ?>
-                            
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <?php the_post_thumbnail('partner-logo', array('class' => 'partner-logo img-fluid')); ?>
+                                <?php else : ?>
+                                    <div class="partner-placeholder bg-light d-flex align-items-center justify-content-center" style="height: 80px;">
+                                        <span class="text-muted"><?php the_title(); ?></span>
+                                    </div>
+                                <?php endif; ?>
                             <?php if ($partner_url) : ?>
                                 </a>
                             <?php endif; ?>
                         </div>
-                    </div>
-                <?php
+                        <?php
+                        $delay += 50;
                     endwhile;
                     wp_reset_postdata();
                 else :
-                    // Display IEEE logos as defaults
-                    $default_logos = array(
-                        'ieee.png' => 'IEEE',
-                        'ieee-ta.png' => 'IEEE Technical Activities',
-                        'ieee-students.png' => 'IEEE Students',
-                        'ieee-yp.png' => 'IEEE Young Professionals'
+                    // Default partner logos if none are set up yet
+                    $default_partners = array(
+                        array('name' => 'IEEE', 'logo' => 'ieee-logo.png'),
+                        array('name' => 'IEEE Technical Activities', 'logo' => 'ieee-ta.png'),
+                        array('name' => 'IEEE Industry Engagement Committee', 'logo' => 'iec.png'),
+                        array('name' => 'IEEE Students', 'logo' => 'students.png'),
+                        array('name' => 'IEEE Young Professionals', 'logo' => 'yp.png'),
+                        array('name' => 'IEEE Region 10', 'logo' => 'r10.png'),
+                        array('name' => 'IEEE Region 8', 'logo' => 'r8.png'),
+                        array('name' => 'IEEE YP Region 10', 'logo' => 'yp-r10.png')
                     );
                     
-                    foreach ($default_logos as $logo => $name) :
-                ?>
-                    <div class="col-6 col-md-3 col-lg-2 mb-4">
-                        <div class="partner-logo text-center">
-                            <a href="https://www.ieee.org" target="_blank" rel="noopener">
-                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/partners/<?php echo esc_attr($logo); ?>" 
-                                     alt="<?php echo esc_attr($name); ?>" 
-                                     class="img-fluid">
-                            </a>
+                    foreach ($default_partners as $index => $partner) :
+                        $delay = 100 + ($index * 50);
+                        ?>
+                        <div class="col-6 col-md-4 col-lg-3 text-center" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+                            <div class="partner-logo-container">
+                                <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo/<?php echo esc_attr($partner['logo']); ?>" 
+                                     alt="<?php echo esc_attr($partner['name']); ?>" 
+                                     class="partner-logo img-fluid"
+                                     style="max-height: 80px; filter: grayscale(100%); transition: filter 0.3s ease;"
+                                     onmouseover="this.style.filter='grayscale(0%)'"
+                                     onmouseout="this.style.filter='grayscale(100%)'">
+                            </div>
                         </div>
-                    </div>
-                <?php
+                        <?php
                     endforeach;
                 endif;
                 ?>
@@ -129,224 +153,399 @@ $secondary_color = get_theme_mod('ieee_secondary_color', '#ffb81c');
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section id="about" class="faq-section py-5">
+    <!-- About IEEE Virtual Career Fairs Section -->
+    <section class="content-section bg-white" id="about">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-5 mb-4 mb-lg-0">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/career-fair.jpg" 
-                         alt="<?php esc_attr_e('IEEE Career Fair Event', 'ieee-career-fair'); ?>" 
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/background/category-bg.jpg" 
+                         alt="<?php _e('IEEE Career Fair Event', 'ieee-career-fair'); ?>" 
                          class="img-fluid rounded shadow">
                 </div>
-                <div class="col-lg-7">
-                    <div class="section-tag"><?php esc_html_e('ABOUT US', 'ieee-career-fair'); ?></div>
-                    <h2 class="section-title"><?php echo esc_html($faq_title); ?></h2>
-                    <div class="section-content">
-                        <?php echo wpautop($faq_content); ?>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="ps-lg-4">
+                        <span class="badge bg-primary mb-3"><?php _e('ABOUT US', 'ieee-career-fair'); ?></span>
+                        <h2 class="display-5 fw-bold mb-4">
+                            <?php _e('What Are', 'ieee-career-fair'); ?> 
+                            <span class="text-primary"><?php _e('IEEE Virtual Career Fairs?', 'ieee-career-fair'); ?></span>
+                        </h2>
+                        <p class="lead mb-4">
+                            <?php _e('IEEE Career Fair is powered by the IEEE Young Professionals Committee in collaboration with the IEEE Industry Engagement Committee and IEEE Student Activities Committee.', 'ieee-career-fair'); ?>
+                        </p>
+                        <p class="mb-4">
+                            <?php _e('The pilot edition will be a virtual career fair in partnership with IEEE Region 10, focusing on the Asia Pacific region. This innovative platform connects talented professionals with leading employers in technology and engineering fields.', 'ieee-career-fair'); ?>
+                        </p>
+                        <div class="d-flex flex-wrap gap-3 mb-4">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span><?php _e('Global Networking', 'ieee-career-fair'); ?></span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span><?php _e('Virtual Interviews', 'ieee-career-fair'); ?></span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                <span><?php _e('Professional Development', 'ieee-career-fair'); ?></span>
+                            </div>
+                        </div>
+                        <a href="#events" class="btn btn-primary btn-lg">
+                            <?php _e('Learn More', 'ieee-career-fair'); ?> <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Why Join Section -->
-    <section id="why-join" class="why-join-section py-5 bg-light">
+    <!-- Why Companies Should Join Section -->
+    <section class="content-section bg-light" id="companies">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7 order-lg-1 order-2">
-                    <div class="section-tag"><?php esc_html_e('FOR EMPLOYERS', 'ieee-career-fair'); ?></div>
-                    <h2 class="section-title"><?php echo esc_html($why_title); ?></h2>
-                    <div class="section-content">
-                        <?php echo wpautop($why_content); ?>
-                    </div>
-                    
-                    <!-- Accordion -->
-                    <div class="accordion mt-4" id="benefitsAccordion">
-                        <!-- Quality Hiring -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <?php esc_html_e('Quality Hiring', 'ieee-career-fair'); ?>
-                                </button>
-                            </h3>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#benefitsAccordion">
-                                <div class="accordion-body">
-                                    <?php esc_html_e('Access to highly qualified IEEE members with specialized skills in engineering, computing, and technical fields, ensuring a better candidate fit for your open positions.', 'ieee-career-fair'); ?>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Access to Talent -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <?php esc_html_e('Access to Talent', 'ieee-career-fair'); ?>
-                                </button>
-                            </h3>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#benefitsAccordion">
-                                <div class="accordion-body">
-                                    <?php esc_html_e('Direct connection with IEEE\'s global network of over 400,000 technical professionals across 160 countries, giving you unparalleled reach to specialized talent.', 'ieee-career-fair'); ?>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Brand Exposure -->
-                        <div class="accordion-item">
-                            <h3 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <?php esc_html_e('Global Brand Exposure', 'ieee-career-fair'); ?>
-                                </button>
-                            </h3>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#benefitsAccordion">
-                                <div class="accordion-body">
-                                    <?php esc_html_e('Enhance your employer brand among the technical community through IEEE\'s prestigious platform, showcasing your company as a leader in innovation and technical excellence.', 'ieee-career-fair'); ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5 mb-4 mb-lg-0 order-lg-2 order-1">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/employers.jpg" 
-                         alt="<?php esc_attr_e('IEEE Career Fair for Employers', 'ieee-career-fair'); ?>" 
-                         class="img-fluid rounded shadow">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Next Generation Section -->
-    <section id="next-gen" class="next-gen-section py-5 text-white" style="background-color: <?php echo esc_attr($primary_color); ?>;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="section-tag text-uppercase"><?php esc_html_e('TALENT DEVELOPMENT', 'ieee-career-fair'); ?></div>
-                    <h2 class="section-title"><?php esc_html_e('Empowering the Next Generation of Innovators', 'ieee-career-fair'); ?></h2>
-                    <p class="lead">
-                        <?php esc_html_e('IEEE Career Fairs provide unique opportunities for students and early career professionals to network with industry leaders, discover internships, and find full-time positions that kickstart their careers while giving employers direct access to fresh talent and innovative minds.', 'ieee-career-fair'); ?>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center mb-5">
+                    <h2 class="section-title mb-4" data-aos="fade-up">
+                        <?php _e('Why Should Companies Join IEEE Career Fairs?', 'ieee-career-fair'); ?>
+                    </h2>
+                    <p class="lead" data-aos="fade-up" data-aos-delay="100">
+                        <?php _e('Connecting with top IEEE talent opens doors to exceptional opportunities and lasting partnerships.', 'ieee-career-fair'); ?>
                     </p>
                 </div>
-                <div class="col-lg-4 text-center text-lg-end">
-                    <a href="#upcoming-events" class="btn btn-light btn-lg px-4"><?php esc_html_e('View Events', 'ieee-career-fair'); ?></a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Opportunity Section -->
-    <section id="opportunity" class="opportunity-section py-5 bg-white">
-        <div class="container">
-            <div class="row text-center mb-5">
-                <div class="col-lg-8 mx-auto">
-                    <h2 class="section-title"><?php esc_html_e('Don\'t Miss the Next Career Opportunity', 'ieee-career-fair'); ?></h2>
-                    <p class="lead">
-                        <?php esc_html_e('Be sure to mark your calendar and prepare your resume for these upcoming career fairs. These events are a rare opportunity to connect with IEEE employers and top hiring companies.', 'ieee-career-fair'); ?>
-                    </p>
-                </div>
-            </div>
-            <div class="text-center">
-                <a href="#upcoming-events" class="btn btn-primary btn-lg"><?php esc_html_e('View Upcoming Career Fairs', 'ieee-career-fair'); ?></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Events Section -->
-    <section id="upcoming-events" class="events-section py-5 bg-light">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title"><?php echo esc_html($events_title); ?></h2>
-                <p class="section-description"><?php echo esc_html($events_description); ?></p>
             </div>
             
+            <div class="row g-4">
+                <!-- Collapsible sections for company benefits -->
+                <div class="col-12">
+                    <div class="accordion" id="companyBenefitsAccordion" data-aos="fade-up" data-aos-delay="200">
+                        
+                        <!-- Quality Hiring -->
+                        <div class="collapsible-section accordion-item">
+                            <div class="collapsible-header accordion-header" id="qualityHiringHeading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#qualityHiring" aria-expanded="true" aria-controls="qualityHiring">
+                                    <i class="fas fa-users text-primary me-3"></i>
+                                    <span class="fw-bold"><?php _e('Quality Hiring', 'ieee-career-fair'); ?></span>
+                                </button>
+                            </div>
+                            <div id="qualityHiring" class="accordion-collapse collapse show" aria-labelledby="qualityHiringHeading" data-bs-parent="#companyBenefitsAccordion">
+                                <div class="accordion-body">
+                                    <p><?php _e('Access to a global pool of highly qualified IEEE professionals and students with proven technical expertise and commitment to excellence in engineering and technology fields.', 'ieee-career-fair'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Access to Talent -->
+                        <div class="collapsible-section accordion-item">
+                            <div class="collapsible-header accordion-header" id="accessTalentHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accessTalent" aria-expanded="false" aria-controls="accessTalent">
+                                    <i class="fas fa-search text-primary me-3"></i>
+                                    <span class="fw-bold"><?php _e('Access to Talent', 'ieee-career-fair'); ?></span>
+                                </button>
+                            </div>
+                            <div id="accessTalent" class="accordion-collapse collapse" aria-labelledby="accessTalentHeading" data-bs-parent="#companyBenefitsAccordion">
+                                <div class="accordion-body">
+                                    <p><?php _e('Connect with diverse talent from multiple IEEE regions, accessing professionals with cutting-edge skills in emerging technologies and established engineering disciplines.', 'ieee-career-fair'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Global Brand Exposure -->
+                        <div class="collapsible-section accordion-item">
+                            <div class="collapsible-header accordion-header" id="brandExposureHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#brandExposure" aria-expanded="false" aria-controls="brandExposure">
+                                    <i class="fas fa-globe text-primary me-3"></i>
+                                    <span class="fw-bold"><?php _e('Global Brand Exposure', 'ieee-career-fair'); ?></span>
+                                </button>
+                            </div>
+                            <div id="brandExposure" class="accordion-collapse collapse" aria-labelledby="brandExposureHeading" data-bs-parent="#companyBenefitsAccordion">
+                                <div class="accordion-body">
+                                    <p><?php _e('Enhance your company\'s visibility within the global IEEE community, reaching top-tier engineering talent and establishing your brand as a preferred employer in technology sectors.', 'ieee-career-fair'); ?></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div><!-- .accordion -->
+                </div><!-- .col-12 -->
+            </div><!-- .row -->
+        </div><!-- .container -->
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12 mb-5">
+                    <h2 class="text-white mb-4" data-aos="fade-up">
+                        <?php _e('Empowering the Next Generation of Innovators', 'ieee-career-fair'); ?>
+                    </h2>
+                    <p class="text-light lead" data-aos="fade-up" data-aos-delay="100">
+                        <?php _e('IEEE Career Fair connects global talent with industry leaders, fostering innovation and career growth across technology and engineering sectors.', 'ieee-career-fair'); ?>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4 text-center">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-number" data-target="50000">0</div>
+                        <div class="stat-label"><?php _e('IEEE Members Worldwide', 'ieee-career-fair'); ?></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-number" data-target="160">0</div>
+                        <div class="stat-label"><?php _e('Countries Represented', 'ieee-career-fair'); ?></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-label"><?php _e('Partner Companies', 'ieee-career-fair'); ?></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-number" data-target="95">0</div>
+                        <div class="stat-label"><?php _e('Success Rate', 'ieee-career-fair'); ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="content-section bg-white" id="cta">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="cta-content bg-primary rounded-4 p-5 text-white" data-aos="zoom-in">
+                        <h2 class="display-6 fw-bold mb-4">
+                            <?php _e('Don\'t Miss the', 'ieee-career-fair'); ?> 
+                            <span class="text-warning"><?php _e('Next Career Opportunity', 'ieee-career-fair'); ?></span>
+                        </h2>
+                        <p class="lead mb-4">
+                            <?php _e('Join thousands of professionals and leading companies at IEEE Career Fair. Whether you\'re seeking your next role or looking to hire top talent, we\'ve got you covered.', 'ieee-career-fair'); ?>
+                        </p>
+                        <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
+                            <a href="#events" class="btn btn-warning btn-lg fw-bold">
+                                <i class="fas fa-calendar-check me-2"></i>
+                                <?php _e('View Upcoming Events', 'ieee-career-fair'); ?>
+                            </a>
+                            <a href="#register" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-user-plus me-2"></i>
+                                <?php _e('Register Today', 'ieee-career-fair'); ?>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Events Section -->
+    <section class="content-section bg-light" id="events">
+        <div class="container">
             <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title mb-4" data-aos="fade-up">
+                        <?php _e('Explore Upcoming Career Fairs', 'ieee-career-fair'); ?>
+                    </h2>
+                    <p class="lead text-muted" data-aos="fade-up" data-aos-delay="100">
+                        <?php _e('Mark your calendar and join us at these exciting career events', 'ieee-career-fair'); ?>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
                 <?php
-                $today = date('Y-m-d');
-                $events_args = array(
-                    'post_type'      => 'career_event',
-                    'posts_per_page' => $events_count,
-                    'meta_key'       => '_ieee_event_date',
-                    'orderby'        => 'meta_value',
-                    'order'          => 'ASC',
-                    'meta_query'     => array(
+                // Get upcoming career events
+                $events = new WP_Query(array(
+                    'post_type' => 'career_event',
+                    'posts_per_page' => 6,
+                    'post_status' => 'publish',
+                    'meta_query' => array(
                         array(
-                            'key'     => '_ieee_event_date',
-                            'value'   => $today,
+                            'key' => '_ieee_event_date',
+                            'value' => date('Y-m-d'),
                             'compare' => '>=',
-                            'type'    => 'DATE'
+                            'type' => 'DATE'
                         )
-                    )
-                );
-                
-                $events_query = new WP_Query($events_args);
-                
-                if ($events_query->have_posts()) :
-                    while ($events_query->have_posts()) : $events_query->the_post();
+                    ),
+                    'meta_key' => '_ieee_event_date',
+                    'orderby' => 'meta_value',
+                    'order' => 'ASC'
+                ));
+
+                if ($events->have_posts()) :
+                    $delay = 100;
+                    while ($events->have_posts()) :
+                        $events->the_post();
                         $event_date = get_post_meta(get_the_ID(), '_ieee_event_date', true);
+                        $event_time = get_post_meta(get_the_ID(), '_ieee_event_time', true);
                         $event_location = get_post_meta(get_the_ID(), '_ieee_event_location', true);
                         $event_status = get_post_meta(get_the_ID(), '_ieee_event_status', true);
                         $registration_url = get_post_meta(get_the_ID(), '_ieee_event_registration_url', true);
                         
-                        $date_obj = new DateTime($event_date);
-                        $formatted_date = $date_obj->format('F j, Y');
-                        $month = $date_obj->format('M');
-                        $day = $date_obj->format('d');
-                        $year = $date_obj->format('Y');
-                ?>
-                    <div class="col-md-6 col-lg-4 mb-4">
-                        <div class="card event-card h-100">
-                            <?php if (has_post_thumbnail()) : ?>
-                                <div class="event-image">
-                                    <?php the_post_thumbnail('event-thumbnail', array('class' => 'card-img-top')); ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="card-body">
-                                <div class="event-date-badge">
-                                    <span class="event-month"><?php echo esc_html($month); ?></span>
-                                    <span class="event-day"><?php echo esc_html($day); ?></span>
-                                    <span class="event-year"><?php echo esc_html($year); ?></span>
-                                </div>
-                                <h3 class="card-title h5 mt-3">
-                                    <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                                </h3>
-                                <?php if ($event_location) : ?>
-                                    <div class="event-location mb-3">
-                                        <i class="fas fa-map-marker-alt me-2"></i><?php echo esc_html($event_location); ?>
+                        $formatted_date = $event_date ? date('M d, Y', strtotime($event_date)) : '';
+                        $status_class = '';
+                        $status_text = '';
+                        
+                        switch ($event_status) {
+                            case 'registration_open':
+                                $status_class = 'success';
+                                $status_text = __('Registration Open', 'ieee-career-fair');
+                                break;
+                            case 'sold_out':
+                                $status_class = 'warning';
+                                $status_text = __('Sold Out', 'ieee-career-fair');
+                                break;
+                            case 'completed':
+                                $status_class = 'secondary';
+                                $status_text = __('Completed', 'ieee-career-fair');
+                                break;
+                            default:
+                                $status_class = 'primary';
+                                $status_text = __('Coming Soon', 'ieee-career-fair');
+                        }
+                        ?>
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+                            <article class="event-card h-100">
+                                <?php if ($formatted_date) : ?>
+                                    <div class="event-date">
+                                        <div class="h5 mb-0"><?php echo date('d', strtotime($event_date)); ?></div>
+                                        <div class="small"><?php echo date('M Y', strtotime($event_date)); ?></div>
                                     </div>
                                 <?php endif; ?>
-                                <div class="event-excerpt mb-3">
-                                    <?php the_excerpt(); ?>
-                                </div>
-                            </div>
-                            <div class="card-footer bg-transparent">
-                                <?php if ($registration_url) : ?>
-                                    <a href="<?php echo esc_url($registration_url); ?>" class="btn btn-primary btn-sm" target="_blank">
-                                        <?php esc_html_e('Register Now', 'ieee-career-fair'); ?>
-                                    </a>
-                                <?php else : ?>
-                                    <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary btn-sm">
-                                        <?php esc_html_e('Event Details', 'ieee-career-fair'); ?>
-                                    </a>
-                                <?php endif; ?>
                                 
-                                <?php if ($event_status) : ?>
-                                    <span class="badge bg-<?php echo esc_attr(ieee_get_status_class($event_status)); ?> float-end">
-                                        <?php echo esc_html(ieee_get_status_text($event_status)); ?>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
+                                <div class="event-details">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h3 class="h5 mb-0"><?php the_title(); ?></h3>
+                                        <span class="badge bg-<?php echo $status_class; ?>"><?php echo $status_text; ?></span>
+                                    </div>
+                                    
+                                    <?php if ($event_time) : ?>
+                                        <div class="mb-2">
+                                            <i class="fas fa-clock text-muted me-2"></i>
+                                            <span class="text-muted"><?php echo esc_html($event_time); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <?php if ($event_location) : ?>
+                                        <div class="mb-3">
+                                            <i class="fas fa-map-marker-alt text-muted me-2"></i>
+                                            <span class="text-muted"><?php echo esc_html($event_location); ?></span>
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <div class="event-excerpt mb-3">
+                                        <?php echo wp_trim_words(get_the_excerpt() ?: get_the_content(), 15); ?>
+                                    </div>
+                                    
+                                    <div class="d-flex gap-2">
+                                        <a href="<?php the_permalink(); ?>" class="btn btn-outline-primary btn-sm flex-grow-1">
+                                            <?php _e('Learn More', 'ieee-career-fair'); ?>
+                                        </a>
+                                        <?php if ($registration_url && $event_status !== 'completed' && $event_status !== 'sold_out') : ?>
+                                            <a href="<?php echo esc_url($registration_url); ?>" class="btn btn-primary btn-sm" target="_blank">
+                                                <?php _e('Register', 'ieee-career-fair'); ?>
+                                            </a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
-                    </div>
-                <?php
+                        <?php
+                        $delay += 100;
                     endwhile;
                     wp_reset_postdata();
                 else :
-                    // Display placeholder events
-                ?>
-                    <div class="col-12">
-                        <div class="alert alert-info" role="alert">
-                            <?php esc_html_e('No upcoming events are currently scheduled. Please check back later or contact us for more information about future career fairs.', 'ieee-career-fair'); ?>
+                    // Default events if none are set up yet
+                    $default_events = array(
+                        array(
+                            'title' => 'IEEE Virtual Career Fair 2025',
+                            'date' => '2025-08-18',
+                            'time' => '10:00 AM - 4:00 PM UTC',
+                            'location' => 'Virtual Event',
+                            'description' => 'Join us for our premier virtual career fair featuring top technology companies from around the world. Connect with recruiters and explore opportunities.',
+                            'status' => 'Registration Open',
+                            'status_class' => 'success'
+                        ),
+                        array(
+                            'title' => 'IEEE Region 10 Career Summit',
+                            'date' => '2025-10-30',
+                            'time' => '9:00 AM - 5:00 PM SGT',
+                            'location' => 'Virtual Event',
+                            'description' => 'Connect with leading employers in the Asia Pacific region. Featuring companies specializing in electronics and telecommunications.',
+                            'status' => 'Coming Soon',
+                            'status_class' => 'primary'
+                        ),
+                        array(
+                            'title' => 'IEEE Student Professional Development Fair',
+                            'date' => '2025-12-04',
+                            'time' => '11:00 AM - 3:00 PM EST',
+                            'location' => 'Virtual Event',
+                            'description' => 'Designed for students and recent graduates. Get career guidance, resume reviews, and networking opportunities.',
+                            'status' => 'Coming Soon',
+                            'status_class' => 'primary'
+                        )
+                    );
+                    
+                    foreach ($default_events as $index => $event) :
+                        $delay = 100 + ($index * 100);
+                        ?>
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $delay; ?>">
+                            <article class="event-card h-100">
+                                <div class="event-date">
+                                    <div class="h5 mb-0"><?php echo date('d', strtotime($event['date'])); ?></div>
+                                    <div class="small"><?php echo date('M Y', strtotime($event['date'])); ?></div>
+                                </div>
+                                
+                                <div class="event-details">
+                                    <div class="d-flex justify-content-between align-items-start mb-3">
+                                        <h3 class="h5 mb-0"><?php echo esc_html($event['title']); ?></h3>
+                                        <span class="badge bg-<?php echo esc_attr($event['status_class']); ?>"><?php echo esc_html($event['status']); ?></span>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <i class="fas fa-clock text-muted me-2"></i>
+                                        <span class="text-muted small"><?php echo esc_html($event['time']); ?></span>
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <i class="fas fa-map-marker-alt text-muted me-2"></i>
+                                        <span class="text-muted small"><?php echo esc_html($event['location']); ?></span>
+                                    </div>
+                                    
+                                    <div class="event-excerpt mb-3">
+                                        <?php echo esc_html($event['description']); ?>
+                                    </div>
+                                    
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-outline-primary btn-sm flex-grow-1" disabled>
+                                            <?php _e('Learn More', 'ieee-career-fair'); ?>
+                                        </button>
+                                        <?php if ($event['status'] === 'Registration Open') : ?>
+                                            <button class="btn btn-primary btn-sm" disabled>
+                                                <?php _e('Register Now', 'ieee-career-fair'); ?>
+                                            </button>
+                                        <?php else : ?>
+                                            <button class="btn btn-primary btn-sm" disabled>
+                                                <?php _e('Coming Soon', 'ieee-career-fair'); ?>
+                                            </button>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </article>
                         </div>
-                    </div>
-                <?php endif; ?>
+                        <?php
+                    endforeach;
+                endif;
+                ?>
+            </div>
+            
+            <!-- View All Events Button -->
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="<?php echo home_url('/career-events/'); ?>" class="btn btn-primary btn-lg">
+                    <?php _e('View All Career Events', 'ieee-career-fair'); ?> <i class="fas fa-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -452,35 +651,4 @@ style.textContent = `
 document.head.appendChild(style);
 </script>
 
-<?php get_footer(); ?>
-
-<?php
-/**
- * Helper function to get appropriate status class for event badge
- */
-function ieee_get_status_class($status) {
-    $classes = array(
-        'upcoming' => 'secondary',
-        'registration_open' => 'success',
-        'sold_out' => 'danger',
-        'completed' => 'dark',
-        'cancelled' => 'danger'
-    );
-    
-    return isset($classes[$status]) ? $classes[$status] : 'secondary';
-}
-
-/**
- * Helper function to get human-readable status text
- */
-function ieee_get_status_text($status) {
-    $text = array(
-        'upcoming' => __('Upcoming', 'ieee-career-fair'),
-        'registration_open' => __('Registration Open', 'ieee-career-fair'),
-        'sold_out' => __('Sold Out', 'ieee-career-fair'),
-        'completed' => __('Completed', 'ieee-career-fair'),
-        'cancelled' => __('Cancelled', 'ieee-career-fair')
-    );
-    
-    return isset($text[$status]) ? $text[$status] : __('Upcoming', 'ieee-career-fair');
-} 
+<?php get_footer(); ?> 

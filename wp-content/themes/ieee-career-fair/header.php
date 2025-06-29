@@ -36,7 +36,7 @@
     <meta name="twitter:description" content="<?php echo get_bloginfo('description'); ?>">
     <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/ieee-logo.png">
     
-    <?php wp_head(); ?>
+    <!-- IEEE Meta Nav Styles -->
     <style type="text/css">
         .meta-nav {
             min-height: 40px;
@@ -48,10 +48,10 @@
         
         #meta-ieee-logo {
             margin: 0px;
-            float:right;
+            float: right;
         }
 
-        #meta-ieee-logo .joinIEEE{
+        #meta-ieee-logo .joinIEEE {
             text-align: right;
             color: #fff;
             padding: 11px 36px;
@@ -66,7 +66,7 @@
             color: #fff;
             text-decoration: underline;
         }
-
+        
         @media (max-width: 800px) {
             .meta-nav {
                 min-height: 100px;
@@ -77,7 +77,7 @@
             }
             .meta-ieee-logo {
                 padding: 20px 0px 0px 0px;
-                float:right;
+                float: right;
                 max-width: 100px;
             }
         }
@@ -135,27 +135,30 @@
             text-decoration: underline;
         }
     </style>
+    
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<!-- IEEE Meta Navigation -->
-<div class="meta-nav">
-    <p id="ieee-meta-a">
-        <a href="https://www.ieee.org/index.html">IEEE.org</a> &#160;|&#160; 
-        <a href="https://www.ieeexplore.ieee.org/Xplore/guesthome.jsp">IEEE <em>Xplore</em><sup>®</sup></a>&#160;|&#160; 
-        <a href="https://standards.ieee.org/">IEEE Standards</a> &#160;|&#160; 
-        <a href="https://spectrum.ieee.org/">IEEE Spectrum</a> &#160;|&#160; 
-        <a href="https://www.ieee.org/sitemap.html">More Sites</a>
-    </p>
-    <p id="ieee-meta-a" style="text-align:right; float: right;">
-        <a href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join">Join IEEE</a> &#160;|&#160; 
-        <a href="https://www.ieee.org/give">Donate</a>
-    </p>
-</div>
-
 <div id="page" class="site">
+    <!-- IEEE Meta Navigation -->
+    <div class="meta-nav">
+        <p id="ieee-meta-a">
+            <a href="https://www.ieee.org/index.html">IEEE.org</a> &#160;|&#160; 
+            <a href="https://www.ieeexplore.ieee.org/Xplore/guesthome.jsp">IEEE <em>Xplore</em><sup>®</sup></a>&#160;|&#160; 
+            <a href="https://standards.ieee.org/">IEEE Standards</a> &#160;|&#160; 
+            <a href="https://spectrum.ieee.org/">IEEE Spectrum</a> &#160;|&#160; 
+            <a href="https://www.ieee.org/sitemap.html">More Sites</a>
+        </p>
+
+        <p id="ieee-meta-a" style="text-align:right; float: right;">
+            <a href="https://www.ieee.org/membership/join/index.html?WT.mc_id=hc_join">Join IEEE</a> &#160;|&#160; 
+            <a href="https://www.ieee.org/give">Donate</a>
+        </p>
+    </div>
+
     <header id="masthead" class="site-header">
         <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
             <div class="container">
